@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const fitZoom = map.getZoom();
   map.setMinZoom(fitZoom - 6);
   map.setMaxZoom(fitZoom + 6);
-  map.setZoom(fitZoom - 4)    // es soll weiter draußen bleiben
+
 
   // --- Länder aus GeoJSON laden (optional) ---
   // Lege 'nations.geojson' neben index.html, sobald vorhanden wird es geladen.
