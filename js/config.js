@@ -1,15 +1,15 @@
 window.MARLE_CONFIG = {
   image: {
-    name: "Marle-Map.jpg", // EXAKT wie im Repo
+    name: "assets/Marle-Map.jpg", // Pfad relativ zu index.html
     width: 14400,
     height: 12501,
   },
   zoom: {
-    minExtra: -6,   // wie weit zusätzlich raus
-    maxExtra: +6,   // wie weit zusätzlich rein
-    startOffset: -4  // Start relativ zu fitBounds: +1 näher, -1 weiter weg
+    minExtra: -6,
+    maxExtra: +6,
+    startOffset: -4 // so belassen, passt so sehr gut
   },
   data: {
-    nationsUrl: "nations.geojson?v=1" // optional; wird geladen, wenn vorhanden
+    nationsUrl: "data/nations.geojson?v=1"
   }
 };
