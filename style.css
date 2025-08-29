@@ -7,9 +7,6 @@ h1 { margin: 0.2rem 0 0.4rem; font-size: 1.6rem; }
 /* Karte füllt den Viewport abzüglich Header */
 #map {
   width: 100%;
-  height: calc(100vh - 120px);
-  max-height: 900px;
-  margin: 0 auto 1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  height: calc(100vh - 80px); /* nutzt fast die ganze Höhe des Fensters */
+  max-height: none;           /* entfernt die 900px-Grenze */
 }
