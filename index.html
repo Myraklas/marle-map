@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Marle Karte</title>
+  <title>Marle – Karte mit Grenzen</title>
 
   <!-- Leaflet CSS -->
   <link
@@ -13,11 +13,16 @@
     crossorigin=""
   />
 
-  <!-- Dein eigenes CSS -->
-  <link rel="stylesheet" href="style.css" />
+  <!-- Geoman (leaflet.pm) CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.css"
+  />
+
+  <!-- Dein CSS -->
+  <link rel="stylesheet" href="style.css?v=geo1" />
 </head>
 <body>
-  <!-- Nur noch die Karte -->
   <div id="map"></div>
 
   <!-- Leaflet JS -->
@@ -27,7 +32,11 @@
     crossorigin=""
   ></script>
 
-  <!-- Dein Script -->
-  <script src="script.js?v=4"></script>
+  <!-- Geoman (leaflet.pm) JS -->
+  <script src="https://unpkg.com/@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.min.js"></script>
+
+  <!-- Deine Scripts: erst Daten, dann Logik -->
+  <script src="script.js?v=geo1"></script>
 </body>
 </html>
+
