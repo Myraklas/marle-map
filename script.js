@@ -1,29 +1,33 @@
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("script.js geladen – zoom fix");
+
   // Leaflet im einfachen Pixel-Koordinatensystem
   const map = L.map("map", {
     crs: L.CRS.Simple,
-    minZoom: -1000,      // erlaubt weit rauszoomen
-    maxZoom: 2,       // erlaubt 2 stufen reinzoomen
-    zoomSnap: 0.25,   // feinere Zoomschritte
+    zoomControl: true,
+    zoomSnap: 0.25,
     wheelPxPerZoomLevel: 120
   });
 
-  // <-- HIER deine finale Bildgröße eintragen (in Pixeln)
-  const imageWidth = 14400;  // z.B. 6000
-  const imageHeight = 12501; // z.B. 4000
+  // Finale Bildgröße in Pixeln (DEINS)
+  const imageWidth = 14400;
+  const imageHeight = 12501;
 
-  // Bild-Bounds [ [minY,minX], [maxY,maxX] ] im Pixelraum
+  // Bild-Bounds im Pixelraum
   const bounds = [[0, 0], [imageHeight, imageWidth]];
 
-  // <-- HIER den Dateinamen deines Bildes anpassen
+  // WICHTIG: Dateiname exakt wie im Repo (Groß-/Kleinschreibung!)
   const image = L.imageOverlay("Marle-Map.jpg", bounds).addTo(map);
 
-  // Auf volle Karte zoomen
+  // Auf das volle Bild zoomen
   map.fitBounds(bounds);
 
+  // Jetzt erst Zoom-Grenzen und Startzoom setzen
+  map.setMinZoom(-10);   // sehr weit raus; bei Bedarf -12/-14 versuchen
+  map.setMaxZoom(6);     // ordentlich rein
+  map.setZoom(-6);       // Start direkt weit draußen
 
-
-  // Optional: Rechteck-Zoom per Shift+Drag aktivieren (ist in Leaflet Standard)
-  // Optional: Doppelklick zum Zoomen deaktivieren, wenn es nervt:
-  // map.doubleClickZoom.disable();
+  // Beispielmarker (löschen/ersetzen)
+  L.marker([imageHeight * 0.5, imageWidth * 0.5]).addTo(map)
+    .bindPopup("Mitte der Karte");
 });
