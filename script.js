@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
   map.fitBounds(bounds);
 
   // Jetzt erst Zoom-Grenzen und Startzoom setzen
-  map.setMinZoom(-10);   // sehr weit raus; bei Bedarf -12/-14 versuchen
+  map.setMinZoom(-6);   // sehr weit raus; bei Bedarf -12/-14 versuchen
   map.setMaxZoom(6);     // ordentlich rein
   map.setZoom(-6);       // Start direkt weit draußen
 
