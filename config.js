@@ -7,7 +7,7 @@ window.MARLE_CONFIG = {
   zoom: {
     minExtra: -6,   // wie weit zusätzlich raus
     maxExtra: +6,   // wie weit zusätzlich rein
-    startOffset: 0  // Start relativ zu fitBounds: +1 näher, -1 weiter weg
+    startOffset: -4  // Start relativ zu fitBounds: +1 näher, -1 weiter weg
   },
   data: {
     nationsUrl: "nations.geojson?v=1" // optional; wird geladen, wenn vorhanden
