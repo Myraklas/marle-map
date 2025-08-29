@@ -1,16 +1,10 @@
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
+html, body { margin:0; padding:0; height:100%; }
+#map { width:100%; height:100vh; }
+.leaflet-interactive { cursor:pointer; }
 
-#map {
-  width: 100%;
-  height: 100vh;
-  margin: 0;
+/* Optional: kleiner Reset-Button (falls später genutzt) */
+.map-reset {
+  background:#fff; border:1px solid #bbb; border-radius:4px;
+  padding:6px 10px; margin:6px; font:14px system-ui; cursor:pointer;
 }
-
-/* Optional: Zeige Handcursor über interaktiven Flächen */
-.leaflet-interactive {
-  cursor: pointer;
-}
+.map-reset:hover { background:#f3f3f3; }
