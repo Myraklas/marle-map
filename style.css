@@ -1,11 +1,23 @@
 html, body {
-  margin: 0;        /* entfernt Standard-Rand */
+  margin: 0;
   padding: 0;
-  height: 100%;     /* Body füllt den ganzen Bildschirm */
+  height: 100%;
 }
 
 #map {
   width: 100%;
-  height: 100vh;    /* volle Fensterhöhe */
-  margin: 0;        /* kein Abstand unten */
+  height: 100vh;   /* Vollbild */
+  margin: 0;
 }
+
+/* Optional: Button-Style angleichen */
+.pm-button {
+  background: #fff;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  padding: 6px 10px;
+  margin: 6px;
+  font: 14px/1.2 system-ui, Arial, sans-serif;
+  cursor: pointer;
+}
+.pm-button:hover { background: #f3f3f3; }
