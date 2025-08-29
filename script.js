@@ -1,67 +1,52 @@
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("clean build geladen");
+  const CFG = window.MARLE_CONFIG;
+  const map = L.map("map", { crs: L.CRS.Simple, zoomSnap: 0.25, wheelPxPerZoomLevel: 120 });
 
-  // --- Grundsetup: Bild-Overlay im Pixel-Koordinatensystem ---
-  const map = L.map("map", {
-    crs: L.CRS.Simple,
-    zoomControl: true,
-    zoomSnap: 0.25,
-    wheelPxPerZoomLevel: 120
-  });
+  const { width: W, height: H, name: IMG } = CFG.image;
+  const bounds = [[0,0],[H,W]];
+  L.imageOverlay(IMG, bounds).addTo(map);
 
-  // >>> DEIN Bild
-  const imageWidth = 14400;
-  const imageHeight = 12501;
-  const imgName = "Marle-Map.jpg"; // exakt wie im Repo
-
-  const bounds = [[0, 0], [imageHeight, imageWidth]];
-  L.imageOverlay(imgName, bounds).addTo(map);
-
-  // Start-Zoom: erst passend, dann leicht näher ran
+  // Basis-View + Grenzen
   map.fitBounds(bounds);
   const fitZoom = map.getZoom();
-  map.setMinZoom(fitZoom - 6);
-  map.setMaxZoom(fitZoom + 6);
-  map.setZoom(fitZoom - 4); 
-  
-  // --- Länder aus GeoJSON laden (optional) ---
-  // Lege 'nations.geojson' neben index.html, sobald vorhanden wird es geladen.
-  fetch('nations.geojson?v=1')
+  map.setMinZoom(fitZoom + (CFG.zoom.minExtra ?? -6));
+  map.setMaxZoom(fitZoom + (CFG.zoom.maxExtra ?? +6));
+
+  // URL-Parameter: ?z=<fix> oder ?offset=<relativ>
+  const params = new URLSearchParams(location.search);
+  const zFixed = params.get("z");
+  const zOffset = params.get("offset");
+
+  if (zFixed !== null) {
+    map.setZoom(Number(zFixed));
+  } else if (zOffset !== null) {
+    map.setZoom(fitZoom + Number(zOffset));
+  } else {
+    map.setZoom(fitZoom + (CFG.zoom.startOffset ?? 0));
+  }
+
+  // Nationen laden (unsichtbar, aber klickbar)
+  fetch(CFG.data.nationsUrl)
     .then(r => r.ok ? r.json() : null)
     .then(data => {
       if (!data) return;
-
-L.geoJSON(data, {
-  // Unsichtbar, aber klickbar:
-  style: () => ({
-    stroke: false,          // keine Linien
-    fillColor: '#000',      // egal
-    fillOpacity: 0.001,     // praktisch unsichtbar
-    interactive: true       // <-- erzwingt Klickbarkeit
-  }),
-  onEachFeature: (feature, layer) => {
-    // Sicherheit: immer ein Popup setzen, auch wenn keine Properties
-    let html = '';
-    if (feature.properties) {
-      if (feature.properties.popup) {
-        html = feature.properties.popup;
-      } else if (feature.properties.name || feature.properties.desc) {
-        const name = feature.properties.name ?? 'Nation';
-        const desc = feature.properties.desc ?? '';
-        html = `<h3>${name}</h3>${desc ? `<p>${desc}</p>` : ''}`;
-      }
-    }
-    if (!html) {
-      html = '<i>Kein Text definiert</i>';
-    }
-    layer.bindPopup(html);
-  }
-}).addTo(map);
+      L.geoJSON(data, {
+        style: () => ({
+          stroke: false,
+          fillColor: "#000",
+          fillOpacity: 0.001, // praktisch unsichtbar, hält die Klick-Hitbox
+          interactive: true
+        }),
+        onEachFeature: (f, layer) => {
+          let html = f?.properties?.popup;
+          if (!html) {
+            const name = f?.properties?.name ?? "Nation";
+            const desc = f?.properties?.desc ?? "";
+            html = `<h3>${name}</h3>${desc ? `<p>${desc}</p>` : ""}`;
+          }
+          layer.bindPopup(html);
+        }
+      }).addTo(map);
     })
-    .catch(() => {
-      // still – Datei ist optional
-    });
-
-  // --- Beispielmarker raus, falls du ihn noch drin hattest ---
-  // (kein Marker nötig)
+    .catch(() => {});
 });
