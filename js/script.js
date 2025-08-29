@@ -25,31 +25,22 @@ document.addEventListener("DOMContentLoaded", () => {
     map.setZoom(fitZoom + (CFG.zoom.startOffset ?? 0));
   }
 
-// --- Nationen laden (unsichtbar, aber klickbar) ---
+  //Nationen unsichtbar aber klickbar
 fetch(CFG.data.nationsUrl)
   .then(r => r.ok ? r.json() : null)
   .then(data => {
     if (!data) return;
 
-    // Sidebar-Helper
     const sidebar = document.getElementById('sidebar');
     const sidebarContent = document.getElementById('sidebarContent');
     const sidebarClose = document.getElementById('sidebarClose');
-    function buildObsidianUrl(vault, file) {
-      if (!file) return null;
-      const v = vault ? `vault=${encodeURIComponent(vault)}&` : '';
-      return `obsidian://open?${v}file=${encodeURIComponent(file)}`;
-    }
+
     function openSidebar(props) {
       const name = props?.name ?? 'Unbenannte Nation';
       const descLong = props?.long ?? props?.desc ?? '';
-      const meta = props?.meta ?? '';
-      const url = props?.url || buildObsidianUrl(props?.vault, props?.obsidian);
       sidebarContent.innerHTML = `
         <h2>${name}</h2>
-        ${meta ? `<div class="meta">${meta}</div>` : ''}
         ${descLong ? `<div class="long">${descLong}</div>` : '<p><i>Keine längere Beschreibung gespeichert.</i></p>'}
-        ${url ? `<p style="margin-top:10px"><a class="btn" href="${url}">↗ Öffnen</a></p>` : ''}
       `;
       sidebar.classList.remove('hidden');
       sidebar.classList.add('open');
@@ -60,33 +51,28 @@ fetch(CFG.data.nationsUrl)
     });
 
     L.geoJSON(data, {
-      // Unsichtbar, aber klickbar
       style: () => ({
         stroke: false,
-        fillColor: "#000",
-        fillOpacity: 0.001, // unsichtbar, aber ordentliche Hitbox
+        fillOpacity: 0.001,
         interactive: true
       }),
       onEachFeature: (f, layer) => {
         const p = f?.properties ?? {};
-        // Popup: Name + Kurzbeschreibung + Buttons
         const name = p.name ?? 'Nation';
         const short = p.desc ?? '';
-        const url = p.url || buildObsidianUrl(p.vault, p.obsidian);
         const popupHtml = `
           <h3 style="margin:0">${name}</h3>
           ${short ? `<p style="margin:.35rem 0 0">${short}</p>` : ''}
           <div class="popup-actions">
             <button type="button" data-action="more">Mehr&nbsp;anzeigen</button>
-            ${url ? `<a href="${url}" target="_blank" rel="noopener">↗ Öffnen</a>` : ''}
           </div>
         `;
         layer.bindPopup(popupHtml);
 
-        // Klick auf Fläche: Sidebar öffnen
+        // Klick direkt auf Fläche öffnet Sidebar
         layer.on('click', () => openSidebar(p));
 
-        // Klicks aus dem Popup abfangen (für den "Mehr"-Button)
+        // Klick aus Popup (Mehr anzeigen)
         layer.on('popupopen', (e) => {
           const btn = e.popup.getElement().querySelector('button[data-action="more"]');
           if (btn) btn.addEventListener('click', () => openSidebar(p));
