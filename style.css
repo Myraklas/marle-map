@@ -6,18 +6,11 @@ html, body {
 
 #map {
   width: 100%;
-  height: 100vh;   /* Vollbild */
+  height: 100vh;
   margin: 0;
 }
 
-/* Optional: Button-Style angleichen */
-.pm-button {
-  background: #fff;
-  border: 1px solid #bbb;
-  border-radius: 4px;
-  padding: 6px 10px;
-  margin: 6px;
-  font: 14px/1.2 system-ui, Arial, sans-serif;
+/* Optional: Zeige Handcursor über interaktiven Flächen */
+.leaflet-interactive {
   cursor: pointer;
 }
-.pm-button:hover { background: #f3f3f3; }
