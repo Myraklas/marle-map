@@ -2,8 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // Leaflet im einfachen Pixel-Koordinatensystem
   const map = L.map("map", {
     crs: L.CRS.Simple,
-    minZoom: -5,      // erlaubt weit rauszoomen
-    maxZoom: 5,       // erlaubt 5 stufen reinzoomen
+    minZoom: -10,      // erlaubt weit rauszoomen
+    maxZoom: 2,       // erlaubt 2 stufen reinzoomen
     zoomSnap: 0.25,   // feinere Zoomschritte
     wheelPxPerZoomLevel: 120
   });
