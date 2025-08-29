@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Unsichtbar, aber klickbar:
         style: () => ({
           stroke: false,       // keine Linien
+          fillColor: '#000',   // farbe egal weil fast unsichtbar
           fillOpacity: 0.001   // praktisch unsichtbar, sorgt für stabile Klick-Hitbox
         }),
         onEachFeature: (feature, layer) => {
@@ -48,11 +49,6 @@ document.addEventListener("DOMContentLoaded", () => {
             html = `<h3>${name}</h3>${desc ? `<p>${desc}</p>` : ''}`;
           }
           if (html) layer.bindPopup(html);
-
-          // Optional: Fokus-Effekt nur beim Öffnen (ohne sichtbare Grenzen)
-          layer.on('popupopen', () => {
-            // nichts zeichnen – bleibt unsichtbar
-          });
         }
       }).addTo(map);
     })
