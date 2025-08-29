@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("Geoman build geladen");
+  console.log("clean build geladen");
 
   // --- Grundsetup: Bild-Overlay im Pixel-Koordinatensystem ---
   const map = L.map("map", {
@@ -9,112 +9,57 @@ document.addEventListener("DOMContentLoaded", () => {
     wheelPxPerZoomLevel: 120
   });
 
-  // Bildgröße (px) und Dateiname DEINER Karte
+  // >>> DEIN Bild
   const imageWidth = 14400;
   const imageHeight = 12501;
-  const imgName = "Marle-Map.jpg"; // Groß/Klein MUSS exakt stimmen
+  const imgName = "Marle-Map.jpg"; // exakt wie im Repo
 
   const bounds = [[0, 0], [imageHeight, imageWidth]];
   L.imageOverlay(imgName, bounds).addTo(map);
 
-  // Auf Bild zoomen, dann Start-/Grenz-Zoom setzen
+  // Start-Zoom: erst passend, dann leicht näher ran
   map.fitBounds(bounds);
   const fitZoom = map.getZoom();
   map.setMinZoom(fitZoom - 6);
   map.setMaxZoom(fitZoom + 6);
-  map.setZoom(fitZoom - 4);
+  map.setZoom(fitZoom + 1); // +1 oder +2, wie du willst
 
-  // --- Geoman aktivieren & konfigurieren ---
-  map.pm.addControls({
-    position: 'topleft',
-    drawMarker: false,
-    drawCircleMarker: false,
-    drawCircle: false,
-    drawText: false,
-    drawPolyline: false,   // wir zeichnen Flächen (Polygone)
-    drawRectangle: false,
-    drawPolygon: true,
-    editMode: true,
-    dragMode: true,
-    cutPolygon: false,
-    removalMode: true
-  });
-
-  // Standardstil für neu gezeichnete Flächen
-  map.pm.setPathOptions({
-    color: '#cc3333',
-    fillColor: '#cc3333',
-    fillOpacity: 0.25,
-    weight: 2
-  });
-
-  // Beim Erstellen direkt ein Popup setzen (später durch echte Nationendaten ersetzen)
-  map.on('pm:create', (e) => {
-    const layer = e.layer;
-    layer.bindPopup('<h3>Neue Nation</h3><p>Kurzbeschreibung …</p>');
-  });
-
-  // --- GeoJSON Laden (falls vorhanden) ---
-  // Lege eine Datei 'nations.geojson' neben index.html/Script.
+  // --- Länder aus GeoJSON laden (optional) ---
+  // Lege 'nations.geojson' neben index.html, sobald vorhanden wird es geladen.
   fetch('nations.geojson?v=1')
     .then(r => r.ok ? r.json() : null)
     .then(data => {
       if (!data) return;
+
       L.geoJSON(data, {
+        // Unsichtbar, aber klickbar:
         style: () => ({
-          color: '#cc3333',
-          fillColor: '#cc3333',
-          fillOpacity: 0.25,
-          weight: 2
+          stroke: false,       // keine Linien
+          fillOpacity: 0.001   // praktisch unsichtbar, sorgt für stabile Klick-Hitbox
         }),
         onEachFeature: (feature, layer) => {
-          // Popup aus gespeicherten properties wiederherstellen
+          // Popups bevorzugt aus properties; fallback auf gespeicherten Popup-HTML
+          let html = '';
           if (feature.properties?.popup) {
-            layer.bindPopup(feature.properties.popup);
-          } else if (feature.properties?.name || feature.properties?.desc) {
-            layer.bindPopup(
-              `<h3>${feature.properties.name ?? 'Nation'}</h3><p>${feature.properties.desc ?? ''}</p>`
-            );
+            html = feature.properties.popup;
+          } else {
+            const name = feature.properties?.name ?? 'Nation';
+            const desc = feature.properties?.desc ?? '';
+            html = `<h3>${name}</h3>${desc ? `<p>${desc}</p>` : ''}`;
           }
+          if (html) layer.bindPopup(html);
+
+          // Optional: Fokus-Effekt nur beim Öffnen (ohne sichtbare Grenzen)
+          layer.on('popupopen', () => {
+            // nichts zeichnen – bleibt unsichtbar
+          });
         }
       }).addTo(map);
     })
-    .catch(() => {});
-
-  // --- Export-Button: alle Polygone als GeoJSON herunterladen ---
-  function downloadGeoJSON() {
-    const features = [];
-    map.eachLayer((layer) => {
-      // Nur echte Polygone (keine Raster/Marker etc.)
-      if (layer instanceof L.Polygon && !(layer instanceof L.Rectangle)) {
-        const gj = layer.toGeoJSON(); // Koords bleiben im Pixelraum (CRS.Simple)
-        // Popup-Inhalt mitspeichern (optional)
-        if (layer.getPopup()) {
-          gj.properties = gj.properties || {};
-          gj.properties.popup = layer.getPopup().getContent();
-        }
-        features.push(gj);
-      }
+    .catch(() => {
+      // still – Datei ist optional
     });
-    const fc = { type: 'FeatureCollection', features };
-    const blob = new Blob([JSON.stringify(fc, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url; a.download = 'nations.geojson';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  }
 
-  // Kleiner UI-Button oben links
-  const saveBtn = L.control({ position: 'topleft' });
-  saveBtn.onAdd = function() {
-    const btn = L.DomUtil.create('button', 'pm-button');
-    btn.textContent = 'Speichern (GeoJSON)';
-    btn.title = 'Alle Flächen als nations.geojson herunterladen';
-    btn.onclick = (e) => { e.preventDefault(); downloadGeoJSON(); };
-    return btn;
-  };
-  saveBtn.addTo(map);
+  // --- Beispielmarker raus, falls du ihn noch drin hattest ---
+  // (kein Marker nötig)
 });
