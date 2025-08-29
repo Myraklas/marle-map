@@ -1,19 +1,31 @@
-// Initialisiere eine Leaflet-Karte (OpenStreetMap Tiles, kein API-Key nötig)
 document.addEventListener("DOMContentLoaded", () => {
-  // Mittelpunkt ungefähr Europa – ändere später zu deiner Weltposition
-  const start = [51.1657, 10.4515]; // Deutschland Mitte
-
+  // Leaflet im einfachen Pixel-Koordinatensystem
   const map = L.map("map", {
-    zoomControl: true,
-    attributionControl: true,
-  }).setView(start, 5);
+    crs: L.CRS.Simple,
+    minZoom: -2,      // erlaubt weit rauszoomen
+    zoomSnap: 0.25,   // feinere Zoomschritte
+    wheelPxPerZoomLevel: 120
+  });
 
-  // OpenStreetMap Tiles
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 19,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>-Mitwirkende',
-  }).addTo(map);
+  // <-- HIER deine finale Bildgröße eintragen (in Pixeln)
+  const imageWidth = 6000;  // z.B. 6000
+  const imageHeight = 4000; // z.B. 4000
 
-  // Beispiel-Marker (kannst du später löschen/ersetzen)
-  L.marker(start).addTo(map).bindPopup("Startpunkt – ersetze mich durch Marle!").openPopup();
+  // Bild-Bounds [ [minY,minX], [maxY,maxX] ] im Pixelraum
+  const bounds = [[0, 0], [imageHeight, imageWidth]];
+
+  // <-- HIER den Dateinamen deines Bildes anpassen
+  const image = L.imageOverlay("marle-map.png", bounds).addTo(map);
+
+  // Auf volle Karte zoomen
+  map.fitBounds(bounds);
+
+  // Beispielmarker – später löschen/ersetzen
+  L.marker([imageHeight * 0.38, imageWidth * 0.5]).addTo(map)
+    .bindPopup("Valmorra (Beispiel)")
+    .openPopup();
+
+  // Optional: Rechteck-Zoom per Shift+Drag aktivieren (ist in Leaflet Standard)
+  // Optional: Doppelklick zum Zoomen deaktivieren, wenn es nervt:
+  // map.doubleClickZoom.disable();
 });
