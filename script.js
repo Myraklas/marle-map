@@ -31,26 +31,32 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(data => {
       if (!data) return;
 
-      L.geoJSON(data, {
-        // Unsichtbar, aber klickbar:
-        style: () => ({
-          stroke: false,       // keine Linien
-          fillColor: '#000',   // farbe egal weil fast unsichtbar
-          fillOpacity: 0.001   // praktisch unsichtbar, sorgt für stabile Klick-Hitbox
-        }),
-        onEachFeature: (feature, layer) => {
-          // Popups bevorzugt aus properties; fallback auf gespeicherten Popup-HTML
-          let html = '';
-          if (feature.properties?.popup) {
-            html = feature.properties.popup;
-          } else {
-            const name = feature.properties?.name ?? 'Nation';
-            const desc = feature.properties?.desc ?? '';
-            html = `<h3>${name}</h3>${desc ? `<p>${desc}</p>` : ''}`;
-          }
-          if (html) layer.bindPopup(html);
-        }
-      }).addTo(map);
+L.geoJSON(data, {
+  // Unsichtbar, aber klickbar:
+  style: () => ({
+    stroke: false,          // keine Linien
+    fillColor: '#000',      // egal
+    fillOpacity: 0.001,     // praktisch unsichtbar
+    interactive: true       // <-- erzwingt Klickbarkeit
+  }),
+  onEachFeature: (feature, layer) => {
+    // Sicherheit: immer ein Popup setzen, auch wenn keine Properties
+    let html = '';
+    if (feature.properties) {
+      if (feature.properties.popup) {
+        html = feature.properties.popup;
+      } else if (feature.properties.name || feature.properties.desc) {
+        const name = feature.properties.name ?? 'Nation';
+        const desc = feature.properties.desc ?? '';
+        html = `<h3>${name}</h3>${desc ? `<p>${desc}</p>` : ''}`;
+      }
+    }
+    if (!html) {
+      html = '<i>Kein Text definiert</i>';
+    }
+    layer.bindPopup(html);
+  }
+}).addTo(map);
     })
     .catch(() => {
       // still – Datei ist optional
