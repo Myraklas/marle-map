@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Jetzt erst Zoom-Grenzen und Startzoom setzen
   map.setMinZoom(-6);   // sehr weit raus; bei Bedarf -12/-14 versuchen
   map.setMaxZoom(6);     // ordentlich rein
+  map.setZoom (0)
  
 
   // Beispielmarker (löschen/ersetzen)
