@@ -46,3 +46,8 @@ html, body { margin:0; padding:0; height:100%; }
   text-decoration: none; color: #111; font: 13px/1.2 system-ui, Arial, sans-serif;
 }
 .popup-actions a:hover, .popup-actions button:hover { background: #f3f3f3; }
+
+.sidebar .long {
+  margin-top: 8px;
+  line-height: 1.5;
+}
