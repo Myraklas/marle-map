@@ -98,4 +98,49 @@ loadOne(CFG.data.nationsUrl)
   })
   .catch(err => console.warn('Nationen-Load-Fehler', err));
 
+
+   /* Wichtige Orte in eigener Leiste */
+  const placesData = [
+    {
+      name: 'Hauptstadt',
+      short: 'Zentrum der Nation',
+      long: 'Ausführliche Beschreibung der Hauptstadt.'
+    },
+    {
+      name: 'Nordhafen',
+      short: 'Wichtiger Handelshafen',
+      long: 'Mehr Details zum Nordhafen.'
+    },
+    {
+      name: 'Mystischer Wald',
+      short: 'Gefährliches Gebiet',
+      long: 'Beschreibung des mystischen Waldes.'
+    }
+  ];
+
+  const placesContainer = document.getElementById('placesContainer');
+  const placeList = document.getElementById('placeList');
+  const placeDetail = document.getElementById('placeDetail');
+
+  if (placesContainer && placeList && placeDetail) {
+    placesContainer.addEventListener('click', ev => ev.stopPropagation());
+
+    placesData.forEach(p => {
+      const item = document.createElement('div');
+      item.className = 'place-item';
+      item.textContent = p.name;
+      item.title = p.short;
+      item.addEventListener('click', ev => {
+        ev.stopPropagation();
+        placeDetail.innerHTML = `<h4>${p.name}</h4><p>${p.long}</p>`;
+        placesContainer.classList.add('open');
+      });
+      placeList.appendChild(item);
+    });
+
+    document.addEventListener('click', () => {
+      placesContainer.classList.remove('open');
+    });
+  }
+
 });
