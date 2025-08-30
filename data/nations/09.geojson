@@ -1,9 +1,10 @@
 {
-  "type": "FeatureCollection",
-  "features": [
-    {
-      "type": "Feature",
-      "properties": { "name": "Dunmarg", "desc": "Kurzbeschreibung …", "long": "" },
+  "type": "Feature",
+  "properties": {
+    "name": "Dunmarg",
+    "desc": "Kurzbeschreibung …",
+    "long": "Längere Beschreibung (optional, erscheint in der Sidebar)."
+  },
       "geometry": {
         "type": "Polygon",
         "coordinates": [[
