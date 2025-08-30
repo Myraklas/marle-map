@@ -1,10 +1,13 @@
 {
-  "type": "Feature",
-  "properties": {
-    "name": "Valmorra",
-    "desc": "Kurzbeschreibung …",
-    "long": "Längere Beschreibung (optional, erscheint in der Sidebar)."
-    },
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Valmorra",
+        "desc": "Kurzbeschreibung …",
+        "long": "Längere Beschreibung (optional, erscheint in der Sidebar)."
+      },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -57,3 +60,5 @@
         ]
       }
     }
+  ]
+}
