@@ -4,7 +4,7 @@
     "name": "Valmorra",
     "desc": "Kurzbeschreibung …",
     "long": "Längere Beschreibung (optional, erscheint in der Sidebar)."
-  },
+    },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
