@@ -1,10 +1,13 @@
 {
-  "type": "Feature",
-  "properties": {
-    "name": "Ceadwyn",
-    "desc": "Kurzbeschreibung …",
-    "long": "Längere Beschreibung (optional, erscheint in der Sidebar)."
-  },
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Ceadwyn",
+        "desc": "Kurzbeschreibung …",
+        "long": "Längere Beschreibung (optional, erscheint in der Sidebar)."
+      },
       "geometry": {
         "type": "Polygon",
         "coordinates": [[
@@ -22,7 +25,8 @@
           [6169.606513,2521.119084],[6243.337354,2513.983841],[6305.176124,2542.524812],[6336.095509,2649.553452],
           [6414.583178,2606.741996],[6490.692434,2530.632741],[6566.801689,2518.74067],[6654.803016,2516.362255],
           [6757.074827,2559.173711],[6795.129455,2478.307628]
-        ]]
+          ]
+        ]
       }
     }
   ]
