@@ -1,10 +1,13 @@
 {
-  "type": "Feature",
-  "properties": {
-    "name": "Erivia",
-    "desc": "Kurzbeschreibung …",
-    "long": "Längere Beschreibung (optional, erscheint in der Sidebar)."
-  },
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Erivia",
+        "desc": "Kurzbeschreibung …",
+        "long": "Längere Beschreibung (optional, erscheint in der Sidebar)."
+      },
       "geometry": {
         "type": "Polygon",
         "coordinates": [[
@@ -71,7 +74,8 @@
           [9889.446368,5215.862406],[9965.555624,5123.104251],[10143.936691,5111.21218],[10162.964005,5006.561954],
           [10269.992645,5104.076938],[10536.375039,5177.807779],[10624.376365,5270.565934],[10907.407659,5444.190172],
           [10952.597529,5451.325415],[11059.62617,5346.675189]
-        ]]
+          ]
+        ]
       }
     }
   ]
