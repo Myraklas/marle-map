@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
   //Nationen unsichtbar aber klickbar
 // ---- NATIONEN LADEN (index.json oder einzelnes GeoJSON) ----
 const nationsLayer = L.geoJSON([], {
-  style: () => ({ stroke: false, fillOpacity: 0.5, interactive: true }),
+  style: () => ({ stroke: false, fillOpacity: 0.0001, interactive: true }),
   onEachFeature: (f, layer) => {
     const p = f?.properties ?? {};
     const name = p.name ?? 'Nation';
