@@ -1,10 +1,13 @@
 {
-  "type": "Feature",
-  "properties": {
-    "name": "Virello",
-    "desc": "Kurzbeschreibung …",
-    "long": "Längere Beschreibung (optional, erscheint in der Sidebar)."
-  },
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Virello",
+        "desc": "Kurzbeschreibung …",
+        "long": "Längere Beschreibung (optional, erscheint in der Sidebar)."
+      },
       "geometry": {
         "type": "Polygon",
         "coordinates": [[
@@ -38,6 +41,9 @@
           [9036.824664,3993.7391],[9093.393206,4075.763487],[9215.015572,4055.964497],[9282.897823,4058.792924],
           [9316.838949,4169.101582],[9387.549627,4183.243717],[9738,3734],[9874,3774],[9890,3696],[9852,3516],
           [9806,3312],[9842,3248],[9876,3140],[9892,3022],[9866,2806]
-        ]]
+          ]
+        ]
       }
     }
+  ]
+}
