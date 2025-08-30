@@ -3,7 +3,7 @@
   "features": [
     {
       "type": "Feature",
-      "properties": { "name": "Nation 9", "desc": "Kurzbeschreibung …", "long": "" },
+      "properties": { "name": "Dunmarg", "desc": "Kurzbeschreibung …", "long": "" },
       "geometry": {
         "type": "Polygon",
         "coordinates": [[
