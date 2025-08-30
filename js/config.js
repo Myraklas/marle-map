@@ -12,6 +12,6 @@ window.MARLE_CONFIG = {
   },
   data: {
     // Pfad ins data/-Verzeichnis
-    nationsUrl: "data/nations/index.json"
+    nationsUrl: "data/nations/index.json?v=1"
   }
 };
