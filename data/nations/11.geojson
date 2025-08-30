@@ -4,7 +4,7 @@
     {
       "type": "Feature",
       "properties": {
-        "popup": "<h3>Neue Nation</h3><p>Kurzbeschreibung …</p>"
+        "popup": "<h3>Totes Land</h3><p>Kurzbeschreibung …</p>"
       },
       "geometry": {
         "type": "Polygon",
