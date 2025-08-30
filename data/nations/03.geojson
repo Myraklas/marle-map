@@ -1,10 +1,13 @@
 {
-  "type": "Feature",
-  "properties": {
-    "name": "Naskar",
-    "desc": "Kurzbeschreibung …",
-    "long": "Längere Beschreibung (optional, erscheint in der Sidebar)."
-  },
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Naskar",
+        "desc": "Kurzbeschreibung …",
+        "long": "Längere Beschreibung (optional, erscheint in der Sidebar)."
+      },
       "geometry": {
         "type": "Polygon",
         "coordinates": [[
@@ -27,6 +30,9 @@
           [8100.615285,2667.206779],[8089.301577,2740.745884],[8123.242702,2822.77027],[8128.899557,2964.191627],
           [8086.47315,3049.04444],[8120.414275,3179.152088],[8049.703597,3272.490183],[8094.958431,3348.857716],
           [8089.301577,3538.362333]
-        ]]
+          ]
+        ]
       }
     }
+  ]
+}
