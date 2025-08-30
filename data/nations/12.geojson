@@ -1,11 +1,10 @@
 {
-  "type": "FeatureCollection",
-  "features": [
-    {
-      "type": "Feature",
-      "properties": {
-        "popup": "<h3>Zwillingsreich-Orthalon</h3><p>Kurzbeschreibung …</p>"
-      },
+  "type": "Feature",
+  "properties": {
+    "name": "Zwillingsreich-Orthalon",
+    "desc": "Kurzbeschreibung …",
+    "long": "Längere Beschreibung (optional, erscheint in der Sidebar)."
+  },
       "geometry": {
         "type": "Polygon",
         "coordinates": [[
