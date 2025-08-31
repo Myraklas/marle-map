@@ -72,22 +72,46 @@ html, body { margin:0; padding:0; height:100%; }
 }
 .place-item:hover { background: #f0f0f0; }
 
-#placeDetail {
-  display: none;
-  margin-top: 8px;
+/* Popup links von der Sidebar für Ortsdetails */
+.place-popup {
+  position: fixed;
+  max-width: 240px;
   background: #fff;
   border: 1px solid #ddd;
+  border-radius: 6px;
   padding: 10px 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  z-index: 1001;
+  transform: translateY(-50%);
 }
-
-#placesContainer.open #placeDetail {
-  display: block;
+.place-popup::before,
+.place-popup::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
 }
-
-#placeDetail h4 {
+.place-popup::before {
+  right: -13px;
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+  border-left: 13px solid #ddd;
+}
+.place-popup::after {
+  right: -12px;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 12px solid #fff;
+}
+.place-popup.hidden {
+  display: none;
+}
+.place-popup h4 {
   margin: 0 0 6px;
   font-size: 16px;
 }
-#placeDetail p {
+.place-popup p {
   margin: 0;
 }

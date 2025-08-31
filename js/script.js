@@ -62,10 +62,13 @@ const sidebarContent = document.getElementById('sidebarContent');
 const sidebarClose = document.getElementById('sidebarClose');
 const placesContainer = document.getElementById('placesContainer');
 const placeList = document.getElementById('placeList');
-const placeDetail = document.getElementById('placeDetail');
+const placePopup = document.getElementById('placePopup');
 
 placesContainer?.addEventListener('click', ev => ev.stopPropagation());
-document.addEventListener('click', () => placesContainer?.classList.remove('open'));
+placePopup?.addEventListener('click', ev => ev.stopPropagation());
+document.addEventListener('click', () => {
+  placePopup?.classList.add('hidden');
+});
 
 function openSidebar(props) {
   const name = props?.name ?? 'Unbenannte Nation';
@@ -77,10 +80,10 @@ function openSidebar(props) {
     ${descLong ? `<div class="long">${descLong}</div>` : '<p><i>Keine längere Beschreibung gespeichert.</i></p>'}
   `;
 
-  if (placesContainer && placeList && placeDetail) {
+  placePopup?.classList.add('hidden');
+
+  if (placesContainer && placeList) {
     placeList.innerHTML = '';
-    placeDetail.innerHTML = '';
-    placesContainer.classList.remove('open');
     placesContainer.style.display = places.length ? '' : 'none';
 
     places.forEach(p => {
@@ -90,8 +93,14 @@ function openSidebar(props) {
       item.title = p.short ?? '';
       item.addEventListener('click', ev => {
         ev.stopPropagation();
-        placeDetail.innerHTML = `<h4>${p.name}</h4><p>${p.long ?? ''}</p>`;
-        placesContainer.classList.add('open');
+        if (placePopup && sidebar) {
+          placePopup.innerHTML = `<h4>${p.name}</h4><p>${p.long ?? ''}</p>`;
+          const itemRect = item.getBoundingClientRect();
+          const sidebarRect = sidebar.getBoundingClientRect();
+          placePopup.style.top = (itemRect.top + itemRect.height / 2) + 'px';
+          placePopup.style.right = (window.innerWidth - sidebarRect.left + 10) + 'px';
+          placePopup.classList.remove('hidden');
+        }
       });
       placeList.appendChild(item);
     });
@@ -103,6 +112,7 @@ function openSidebar(props) {
 sidebarClose?.addEventListener('click', () => {
   sidebar.classList.remove('open');
   sidebar.classList.add('hidden');
+  placePopup?.classList.add('hidden');
 });
 
 // Helper: lädt eine Datei (GeoJSON)
