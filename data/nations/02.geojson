@@ -23,7 +23,6 @@
           { "name": "Velthar", "short": "Stadt im Süden", "long": "Eine Stadt in der es sich anfühlt als würde immer die Sonne scheinen, es riecht nach Zitrusfrüchten und süßen gewürzen. " },
           { "name": "Nebelsee", "short": "See im Gebirgering", "long": "Ein See auf dem der Nebel immer Steht, man kann seine grenzen nicht sehen. es ist eine der offenen Stellen an den man ins Tote Land kommen könnte. " }
         ]
-        ]
       },
       "geometry": {
         "type": "Polygon",
