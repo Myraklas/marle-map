@@ -52,23 +52,17 @@ html, body { margin:0; padding:0; height:100%; }
   line-height: 1.5;
 }
 
-/* Liste wichtiger Orte (unten rechts) */
+/* Liste wichtiger Orte in der Sidebar */
 #placesContainer {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  flex-direction: row-reverse; /* Liste rechts, Details links */
-  z-index: 900;
+  margin-top: 16px;
   font: 14px/1.4 system-ui, Arial, sans-serif;
 }
 
 #placeList {
-  width: 200px;
-  max-height: 180px; /* ~3 Einträge sichtbar */
+  max-height: 180px;
   overflow-y: auto;
   background: #fff;
-  box-shadow: -4px 0 8px rgba(0,0,0,.15);
+  border: 1px solid #ddd;
 }
 
 .place-item {
@@ -79,16 +73,15 @@ html, body { margin:0; padding:0; height:100%; }
 .place-item:hover { background: #f0f0f0; }
 
 #placeDetail {
-  width: 0;
-  overflow: hidden;
+  display: none;
+  margin-top: 8px;
   background: #fff;
-  box-shadow: -4px 0 8px rgba(0,0,0,.15);
-  transition: width 200ms ease;
+  border: 1px solid #ddd;
+  padding: 10px 12px;
 }
 
 #placesContainer.open #placeDetail {
-  width: 260px;
-  padding: 10px 12px;
+  display: block;
 }
 
 #placeDetail h4 {

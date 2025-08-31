@@ -60,14 +60,43 @@ const nationsLayer = L.geoJSON([], {
 const sidebar = document.getElementById('sidebar');
 const sidebarContent = document.getElementById('sidebarContent');
 const sidebarClose = document.getElementById('sidebarClose');
+const placesContainer = document.getElementById('placesContainer');
+const placeList = document.getElementById('placeList');
+const placeDetail = document.getElementById('placeDetail');
+
+placesContainer?.addEventListener('click', ev => ev.stopPropagation());
+document.addEventListener('click', () => placesContainer?.classList.remove('open'));
 
 function openSidebar(props) {
   const name = props?.name ?? 'Unbenannte Nation';
   const descLong = props?.long ?? props?.desc ?? '';
+  const places = Array.isArray(props?.places) ? props.places : [];
+
   sidebarContent.innerHTML = `
     <h2>${name}</h2>
     ${descLong ? `<div class="long">${descLong}</div>` : '<p><i>Keine längere Beschreibung gespeichert.</i></p>'}
   `;
+
+  if (placesContainer && placeList && placeDetail) {
+    placeList.innerHTML = '';
+    placeDetail.innerHTML = '';
+    placesContainer.classList.remove('open');
+    placesContainer.style.display = places.length ? '' : 'none';
+
+    places.forEach(p => {
+      const item = document.createElement('div');
+      item.className = 'place-item';
+      item.textContent = p.name;
+      item.title = p.short ?? '';
+      item.addEventListener('click', ev => {
+        ev.stopPropagation();
+        placeDetail.innerHTML = `<h4>${p.name}</h4><p>${p.long ?? ''}</p>`;
+        placesContainer.classList.add('open');
+      });
+      placeList.appendChild(item);
+    });
+  }
+
   sidebar.classList.remove('hidden');
   sidebar.classList.add('open');
 }
@@ -97,50 +126,5 @@ loadOne(CFG.data.nationsUrl)
     console.log('Nationen geladen (Layer):', nationsLayer.getLayers().length);
   })
   .catch(err => console.warn('Nationen-Load-Fehler', err));
-
-
-   /* Wichtige Orte in eigener Leiste */
-  const placesData = [
-    {
-      name: 'Hauptstadt',
-      short: 'Zentrum der Nation',
-      long: 'Ausführliche Beschreibung der Hauptstadt.'
-    },
-    {
-      name: 'Nordhafen',
-      short: 'Wichtiger Handelshafen',
-      long: 'Mehr Details zum Nordhafen.'
-    },
-    {
-      name: 'Mystischer Wald',
-      short: 'Gefährliches Gebiet',
-      long: 'Beschreibung des mystischen Waldes.'
-    }
-  ];
-
-  const placesContainer = document.getElementById('placesContainer');
-  const placeList = document.getElementById('placeList');
-  const placeDetail = document.getElementById('placeDetail');
-
-  if (placesContainer && placeList && placeDetail) {
-    placesContainer.addEventListener('click', ev => ev.stopPropagation());
-
-    placesData.forEach(p => {
-      const item = document.createElement('div');
-      item.className = 'place-item';
-      item.textContent = p.name;
-      item.title = p.short;
-      item.addEventListener('click', ev => {
-        ev.stopPropagation();
-        placeDetail.innerHTML = `<h4>${p.name}</h4><p>${p.long}</p>`;
-        placesContainer.classList.add('open');
-      });
-      placeList.appendChild(item);
-    });
-
-    document.addEventListener('click', () => {
-      placesContainer.classList.remove('open');
-    });
-  }
 
 });
