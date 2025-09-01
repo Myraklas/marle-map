@@ -8,9 +8,9 @@
         "desc": "Kurzbeschreibung …",
         "long": "Längere Beschreibung (optional, erscheint in der Sidebar).",
         "places": [
-          { "name": "Hauptstadt", "short": "Zentrum der Nation", "long": "Ausführliche Beschreibung der Hauptstadt." },
-          { "name": "Nordhafen", "short": "Wichtiger Handelshafen", "long": "Mehr Details zum Nordhafen." },
-          { "name": "Mystischer Wald", "short": "Gefährliches Gebiet", "long": "Beschreibung des mystischen Waldes." }
+          { "name": "Hauptstadt", "short": "Zentrum der Nation", "long": "Ausführliche Beschreibung der Hauptstadt.", "coords": [11200, 4800] },
+          { "name": "Nordhafen", "short": "Wichtiger Handelshafen", "long": "Mehr Details zum Nordhafen.", "coords": [11800, 5200] },
+          { "name": "Mystischer Wald", "short": "Gefährliches Gebiet", "long": "Beschreibung des mystischen Waldes.", "coords": [12500, 4500] }
         ]
       },
       "geometry": {
