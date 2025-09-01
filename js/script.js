@@ -98,7 +98,7 @@ function openSidebar(props) {
           const itemRect = item.getBoundingClientRect();
           const sidebarRect = sidebar.getBoundingClientRect();
           placePopup.style.top = (itemRect.top + itemRect.height / 2) + 'px';
-          placePopup.style.right = (window.innerWidth - sidebarRect.left + 10) + 'px';
+          placePopup.style.left = (sidebarRect.right + 10) + 'px';
           placePopup.classList.remove('hidden');
         }
       });
