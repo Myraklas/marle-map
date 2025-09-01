@@ -69,14 +69,15 @@ const nationsLayer = L.geoJSON([], {
 }).addTo(map);
 
 // Sidebar-Referenzen nur einmal holen
-const sidebar = document.getElementById('sidebar');
+const sidebar = document.getElementById('sidebar'); // rechte Sidebar
 const sidebarContent = document.getElementById('sidebarContent');
 const sidebarClose = document.getElementById('sidebarClose');
-const placesContainer = document.getElementById('placesContainer');
+const placesSidebar = document.getElementById('placesSidebar'); // linke Sidebar
 const placeList = document.getElementById('placeList');
+const placesClose = document.getElementById('placesClose');
 const placePopup = document.getElementById('placePopup');
 
-placesContainer?.addEventListener('click', ev => ev.stopPropagation());
+placesSidebar?.addEventListener('click', ev => ev.stopPropagation());
 placePopup?.addEventListener('click', ev => ev.stopPropagation());
 document.addEventListener('click', () => {
   placePopup?.classList.add('hidden');
@@ -98,9 +99,16 @@ function openSidebar(props) {
 
   placePopup?.classList.add('hidden');
 
-  if (placesContainer && placeList) {
+  if (placesSidebar && placeList) {
     placeList.innerHTML = '';
-    placesContainer.style.display = places.length ? '' : 'none';
+
+    if (places.length) {
+      placesSidebar.classList.remove('hidden');
+      placesSidebar.classList.add('open');
+    } else {
+      placesSidebar.classList.remove('open');
+      placesSidebar.classList.add('hidden');
+    }
 
     places.forEach(p => {
       const item = document.createElement('div');
@@ -129,7 +137,14 @@ function openSidebar(props) {
 sidebarClose?.addEventListener('click', () => {
   sidebar.classList.remove('open');
   sidebar.classList.add('hidden');
+  placesSidebar?.classList.remove('open');
+  placesSidebar?.classList.add('hidden');
   placePopup?.classList.add('hidden');
+});
+
+placesClose?.addEventListener('click', () => {
+  placesSidebar?.classList.remove('open');
+  placesSidebar?.classList.add('hidden');
 });
 
 // Helper: lädt eine Datei (GeoJSON)
