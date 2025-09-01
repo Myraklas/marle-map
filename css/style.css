@@ -62,6 +62,19 @@ html, body { margin:0; padding:0; height:100%; }
 #sidebar p  { margin: 6px 0; }
 .sidebar .meta { color:#555; font-size: 13px; }
 
+.sidebar .nation-icon {
+  display: block;
+  max-width: 80px;
+  margin: 0 auto 12px;
+}
+
+.sidebar .nation-image {
+  width: 100%;
+  display: block;
+  margin: 8px 0;
+  border-radius: 4px;
+}
+
 .popup-actions {
   margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap;
 }
