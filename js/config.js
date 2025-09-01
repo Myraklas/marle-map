@@ -12,7 +12,7 @@ window.MARLE_CONFIG = {
   },
   places: {
     // Ab welcher Zoomstufe Orte angezeigt werden (relativ zu fitBounds-Zoom)
-    minExtra: -1
+    minExtra: -3
   },
   data: {
     // Pfad ins data/-Verzeichnis
