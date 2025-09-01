@@ -86,9 +86,13 @@ function openSidebar(props) {
   const name = props?.name ?? 'Unbenannte Nation';
   const descLong = props?.long ?? props?.desc ?? '';
   const places = Array.isArray(props?.places) ? props.places : [];
+  const icon = props?.icon ?? '';
+  const image = props?.image ?? '';
 
   sidebarContent.innerHTML = `
+    ${icon ? `<img class="nation-icon" src="${icon}" alt="Wappen von ${name}">` : ''}
     <h2>${name}</h2>
+    ${image ? `<img class="nation-image" src="${image}" alt="Landschaft von ${name}">` : ''}
     ${descLong ? `<div class="long">${descLong}</div>` : '<p><i>Keine längere Beschreibung gespeichert.</i></p>'}
   `;
 
@@ -104,15 +108,17 @@ function openSidebar(props) {
       item.textContent = p.name;
       item.title = p.short ?? '';
       item.addEventListener('click', ev => {
-        ev.stopPropagation();
-        placePopup?.classList.add('hidden');
-        const marker = p.__marker;
-        if (marker) {
-          const targetZoom = Math.max(map.getZoom(), placesMinZoom);
-          map.once('moveend', () => marker.openPopup());
-          map.setView(marker.getLatLng(), targetZoom);
-        }
+         ev.stopPropagation();
+           placePopup?.classList.add('hidden');
+
+           const marker = p.__marker;
+             if (marker) {
+             const targetZoom = Math.max(map.getZoom(), placesMinZoom);
+             map.once('moveend', () => marker.openPopup());
+           map.setView(marker.getLatLng(), targetZoom);
+           }
       });
+
       placeList.appendChild(item);
     });
   }

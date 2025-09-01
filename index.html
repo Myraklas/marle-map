@@ -13,14 +13,18 @@
   />
   <!-- Dein Stylesheet -->
   <link rel="stylesheet" href="css/style.css?v=3" />
-</head>
-<body>
-  <div id="map"></div>
-  
-  <!-- Seitenleiste für lange Beschreibungen -->
-<div id="sidebar" class="sidebar hidden">
-  <button id="sidebarClose" aria-label="Schließen">×</button>
-  <div id="sidebarContent"></div>
+  </head>
+  <body>
+    <header id="titleBanner">
+      <img id="cityIcon" alt="Stadtwappen" />
+      <span class="title-text">Marle – Karte</span>
+    </header>
+    <div id="map"></div>
+
+    <!-- Seitenleiste für lange Beschreibungen -->
+  <div id="sidebar" class="sidebar hidden">
+    <button id="sidebarClose" aria-label="Schließen">×</button>
+    <div id="sidebarContent"></div>
   <div id="placesContainer" class="places-container">
     <div id="placeList" class="place-list"></div>
   </div>
