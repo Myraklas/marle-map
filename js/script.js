@@ -74,9 +74,13 @@ function openSidebar(props) {
   const name = props?.name ?? 'Unbenannte Nation';
   const descLong = props?.long ?? props?.desc ?? '';
   const places = Array.isArray(props?.places) ? props.places : [];
+  const icon = props?.icon ?? '';
+  const image = props?.image ?? '';
 
   sidebarContent.innerHTML = `
+    ${icon ? `<img class="nation-icon" src="${icon}" alt="Wappen von ${name}">` : ''}
     <h2>${name}</h2>
+    ${image ? `<img class="nation-image" src="${image}" alt="Landschaft von ${name}">` : ''}
     ${descLong ? `<div class="long">${descLong}</div>` : '<p><i>Keine längere Beschreibung gespeichert.</i></p>'}
   `;
 

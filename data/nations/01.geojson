@@ -7,6 +7,8 @@
         "name": "Valmorra",
         "desc": "Kurzbeschreibung …",
         "long": "Längere Beschreibung (optional, erscheint in der Sidebar).",
+        "icon": "https://placehold.co/80x80",
+        "image": "https://placehold.co/300x150",
         "places": [
           { "name": "Hauptstadt", "short": "Zentrum der Nation", "long": "Ausführliche Beschreibung der Hauptstadt." },
           { "name": "Nordhafen", "short": "Wichtiger Handelshafen", "long": "Mehr Details zum Nordhafen." },
