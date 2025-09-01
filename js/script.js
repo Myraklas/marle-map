@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const CFG = window.MARLE_CONFIG;
   const map = L.map("map", { crs: L.CRS.Simple, zoomSnap: 0.25, wheelPxPerZoomLevel: 120 });
+  const placesLayer = L.layerGroup();
 
   const { width: W, height: H, name: IMG } = CFG.image;
   const bounds = [[0,0],[H,W]];
@@ -9,8 +10,19 @@ document.addEventListener("DOMContentLoaded", () => {
   // Basis-View + Grenzen
   map.fitBounds(bounds);
   const fitZoom = map.getZoom();
+  const placesMinZoom = fitZoom + (CFG.places?.minExtra ?? 0);
   map.setMinZoom(fitZoom + (CFG.zoom.minExtra ?? -6));
   map.setMaxZoom(fitZoom + (CFG.zoom.maxExtra ?? +6));
+
+  function updatePlacesVisibility() {
+    const show = map.getZoom() >= placesMinZoom;
+    if (show && !map.hasLayer(placesLayer)) {
+      map.addLayer(placesLayer);
+    } else if (!show && map.hasLayer(placesLayer)) {
+      map.removeLayer(placesLayer);
+    }
+  }
+  map.on('zoomend', updatePlacesVisibility);
 
   // URL-Parameter: ?z=<fix> oder ?offset=<relativ>
   const params = new URLSearchParams(location.search);
@@ -96,16 +108,17 @@ function openSidebar(props) {
       item.textContent = p.name;
       item.title = p.short ?? '';
       item.addEventListener('click', ev => {
-        ev.stopPropagation();
-        if (placePopup && sidebar) {
-          placePopup.innerHTML = `<h4>${p.name}</h4><p>${p.long ?? ''}</p>`;
-          const itemRect = item.getBoundingClientRect();
-          const sidebarRect = sidebar.getBoundingClientRect();
-          placePopup.style.top = (itemRect.top + itemRect.height / 2) + 'px';
-          placePopup.style.left = (sidebarRect.right + 10) + 'px';
-          placePopup.classList.remove('hidden');
-        }
+         ev.stopPropagation();
+           placePopup?.classList.add('hidden');
+
+           const marker = p.__marker;
+             if (marker) {
+             const targetZoom = Math.max(map.getZoom(), placesMinZoom);
+             map.once('moveend', () => marker.openPopup());
+           map.setView(marker.getLatLng(), targetZoom);
+           }
       });
+
       placeList.appendChild(item);
     });
   }
@@ -136,7 +149,24 @@ loadOne(CFG.data.nationsUrl)
     }
   })
   .then(geoList => {
-    geoList.forEach(g => nationsLayer.addData(g));
+    geoList.forEach(g => {
+      g.features?.forEach(f => {
+        const places = Array.isArray(f.properties?.places) ? f.properties.places : [];
+        places.forEach(p => {
+          if (Array.isArray(p.coords)) {
+            const [x, y] = p.coords;
+            const icon = p.icon ? L.icon({ iconUrl: p.icon, iconSize: [24,24], iconAnchor: [12,24] }) : undefined;
+            const marker = L.marker([y, x], icon ? { icon } : {});
+            const popupHtml = `<strong>${p.name ?? ''}</strong>${p.short ? `<br/>${p.short}` : ''}`;
+            marker.bindPopup(popupHtml);
+            marker.addTo(placesLayer);
+            p.__marker = marker;
+          }
+        });
+      });
+      nationsLayer.addData(g);
+    });
+    updatePlacesVisibility();
     console.log('Nationen geladen (Layer):', nationsLayer.getLayers().length);
   })
   .catch(err => console.warn('Nationen-Load-Fehler', err));
