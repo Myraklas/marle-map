@@ -10,10 +10,10 @@
         "icon": "assets/images/wappen/Virello-Wappen.png",
         "image": "assets/images/nation/Virello-View.png",
         "places": [
-          { "name": "Karveth", "short": "Hauptstadtvon Virello, hier ist Ordnung und pünktlichkeit die höchste Tugend und wer sie missachten wird es zu spüren bekommen.", },
+          { "name": "Karveth", "short": "Hauptstadtvon Virello, hier ist Ordnung und pünktlichkeit die höchste Tugend und wer sie missachten wird es zu spüren bekommen."},
           { "name": "Dorran", "short": "Stadt im Osten, auch die vergessen Stadt genannt. Sie ist zwischen den Hügeln versteckt und wenn die Goldfaden-Straße nicht direkt an ihr vorbei führen würde, würde man sie bestimmt übersehen." },
           { "name": "Velthar", "short": "Stadt im Süden,Eine Stadt in der es sich anfühlt als würde immer die Sonne scheinen, es riecht nach Zitrusfrüchten und süßen gewürzen. " },
-          { "name": "Nebelsee", "short": "See im Gebirgering,Ein See auf dem der Nebel immer Steht, man kann seine grenzen nicht sehen. es ist eine der offenen Stellen an den man ins Tote Land kommen könnte", }
+          { "name": "Nebelsee", "short": "See im Gebirgering,Ein See auf dem der Nebel immer Steht, man kann seine grenzen nicht sehen. es ist eine der offenen Stellen an den man ins Tote Land kommen könnte" }
         ]
       },
       "geometry": {
