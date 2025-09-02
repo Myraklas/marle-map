@@ -117,8 +117,6 @@ html, body { margin:0; padding:0; height:100%; }
 #placeList {
   margin-top: 16px;
   font: 14px/1.4 system-ui, Arial, sans-serif;
-  max-height: 180px;
-  overflow-y: auto;
   background: #fff;
   border: 1px solid #ddd;
 }
