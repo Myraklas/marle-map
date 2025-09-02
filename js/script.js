@@ -91,8 +91,10 @@ function openSidebar(props) {
   const image = props?.image ?? '';
 
   sidebarContent.innerHTML = `
-    ${icon ? `<img class="nation-icon" src="${icon}" alt="Wappen von ${name}">` : ''}
-    <h2>${name}</h2>
+    <div class="nation-header">
+      <h2>${name}</h2>
+      ${icon ? `<img class="nation-icon" src="${icon}" alt="Wappen von ${name}">` : ''}
+    </div>
     ${image ? `<img class="nation-image" src="${image}" alt="Landschaft von ${name}">` : ''}
     ${descLong ? `<div class="long">${descLong}</div>` : '<p><i>Keine längere Beschreibung gespeichert.</i></p>'}
   `;
@@ -113,18 +115,30 @@ function openSidebar(props) {
     places.forEach(p => {
       const item = document.createElement('div');
       item.className = 'place-item';
-      item.textContent = p.name;
-      item.title = p.short ?? '';
-      item.addEventListener('click', ev => {
-         ev.stopPropagation();
-           placePopup?.classList.add('hidden');
 
-           const marker = p.__marker;
-             if (marker) {
-             const targetZoom = Math.max(map.getZoom(), placesMinZoom);
-             map.once('moveend', () => marker.openPopup());
-           map.setView(marker.getLatLng(), targetZoom);
-           }
+      const nameDiv = document.createElement('div');
+      nameDiv.className = 'place-name';
+      nameDiv.textContent = p.name;
+      item.appendChild(nameDiv);
+
+      if (p.short) {
+        const descDiv = document.createElement('div');
+        descDiv.className = 'place-desc';
+        descDiv.textContent = p.short;
+        item.appendChild(descDiv);
+      }
+
+      nameDiv.addEventListener('click', ev => {
+        ev.stopPropagation();
+        item.classList.toggle('open');
+        placePopup?.classList.add('hidden');
+
+        const marker = p.__marker;
+        if (marker) {
+          const targetZoom = Math.max(map.getZoom(), placesMinZoom);
+          map.once('moveend', () => marker.openPopup());
+          map.setView(marker.getLatLng(), targetZoom);
+        }
       });
 
       placeList.appendChild(item);
