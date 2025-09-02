@@ -8,7 +8,7 @@ window.MARLE_CONFIG = {
   zoom: {
     minExtra: -6,    // wie weit zusätzlich raus
     maxExtra: +6,    // wie weit zusätzlich rein
-    startOffset: -4  // so belassen, so ist sehr gut
+    startOffset: -3 // so belassen, so ist sehr gut
   },
   places: {
     // Ab welcher Zoomstufe Orte angezeigt werden (relativ zu fitBounds-Zoom)
