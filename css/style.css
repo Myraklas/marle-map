@@ -74,10 +74,22 @@ html, body { margin:0; padding:0; height:100%; }
 #sidebar p  { margin: 6px 0; }
 .sidebar .meta { color:#555; font-size: 13px; }
 
-.sidebar .nation-icon {
-  display: block;
-  max-width: 80px;
-  margin: 0 auto 12px;
+.nation-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.nation-header h2 {
+  margin: 0;
+  flex: 1;
+  font-size: 18px;
+}
+.nation-header .nation-icon {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  margin: 0;
 }
 
 .sidebar .nation-image {
@@ -114,9 +126,21 @@ html, body { margin:0; padding:0; height:100%; }
 .place-item {
   padding: 8px 10px;
   border-bottom: 1px solid #ddd;
-  cursor: pointer;
 }
-.place-item:hover { background: #f0f0f0; }
+.place-item .place-name {
+  cursor: pointer;
+  font-weight: 600;
+}
+.place-item .place-desc {
+  display: none;
+  margin-top: 4px;
+  font-size: 13px;
+  color: #333;
+}
+.place-item.open .place-desc {
+  display: block;
+}
+.place-item .place-name:hover { background: #f0f0f0; }
 
 /* Popup rechts von der Sidebar für Ortsdetails */
 .place-popup {
