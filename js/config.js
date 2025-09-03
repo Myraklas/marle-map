@@ -11,11 +11,11 @@ window.MARLE_CONFIG = {
   // Einstellungen zum Zoomverhalten
   zoom: {
     // Wie weit zusätzlich herausgezoomt werden kann
-    minExtra: -6,
+    minExtra: -4,
     // Wie weit zusätzlich hineingezoomt werden kann
-    maxExtra: +6,
+    maxExtra: +2,
     // Startversatz des Zoomfaktors
-    startOffset: -3
+    startOffset: -3.5
   },
   // Einstellungen für die Anzeige von Orten
   places: {
