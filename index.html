@@ -13,12 +13,18 @@
   />
   <!-- Dein Stylesheet -->
   <link rel="stylesheet" href="css/style.css?v=3" />
+  <link rel="stylesheet" href="css/wiki.css?v=1" />
   </head>
   <body>
     <header id="titleBanner">
       <img id="cityIcon" alt="Stadtwappen" />
       <span class="title-text">Marle – Karte</span>
     </header>
+    <!-- Optionales Mini-Overlay für das Wiki-Demo -->
+    <div id="wiki-demo" style="position:absolute;top:4rem;right:1rem;z-index:1000;">
+      <a href="#" data-wiki="data/wiki/sample1.html">Demo-Wiki</a>
+    </div>
+
     <div id="map"></div> <!-- Wird von Leaflet als Kartencontainer genutzt -->
 
     <!-- Seitenleiste für lange Beschreibungen -->
@@ -46,5 +52,6 @@
   <!-- Deine Scripts -->
   <script src="js/config.js?v=3"></script>
   <script src="js/script.js?v=3"></script>
+  <script src="js/wiki.js?v=1"></script>
 </body>
 </html>
