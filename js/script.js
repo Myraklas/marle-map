@@ -3,6 +3,7 @@
  * Nationen und Orte und steuert deren Darstellung.
  */
 document.addEventListener("DOMContentLoaded", () => {
+  // ===== Abschnitt 1: Karte vorbereiten =====
   const CFG = window.MARLE_CONFIG;
   // Karte im einfachen CRS-Modus anlegen
   const map = L.map("map", { crs: L.CRS.Simple, zoomSnap: 0.25, wheelPxPerZoomLevel: 120 });
@@ -46,7 +47,8 @@ document.addEventListener("DOMContentLoaded", () => {
     map.setZoom(fitZoom + (CFG.zoom.startOffset ?? 0));
   }
 
-  //Nationen unsichtbar aber klickbar
+  // ===== Abschnitt 2: Nationen-Layer =====
+  // Nationen unsichtbar, aber klickbar
 // ---- NATIONEN LADEN (index.json oder einzelnes GeoJSON) ----
 const nationsLayer = L.geoJSON([], {
   style: () => ({ stroke: false, fillOpacity: 0.0001, interactive: true }),
@@ -77,6 +79,7 @@ const nationsLayer = L.geoJSON([], {
   }
 }).addTo(map);
 
+// ===== Abschnitt 3: Sidebars und Popups =====
 // Sidebar-Referenzen nur einmal holen
 const sidebar = document.getElementById('sidebar'); // rechte Sidebar
 const sidebarContent = document.getElementById('sidebarContent');
@@ -176,6 +179,7 @@ placesClose?.addEventListener('click', () => {
   placesSidebar?.classList.add('hidden');
 });
 
+// ===== Abschnitt 4: Daten laden =====
 // Helper: lädt eine Datei (GeoJSON)
 const loadOne = (url) => fetch(url + '?v=' + Date.now()).then(r => r.json());
 
