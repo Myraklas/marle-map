@@ -37,11 +37,11 @@ html, body { margin:0; padding:0; height:100%; background: #6f88b6; }
 .sidebar {
   position: fixed;
   top: 0;
-  width: 360px;
+  width: 380px;
   max-width: 90vw;
   height: 100vh;
-  background: #486682;
-  padding: 16px 14px 75px;
+  background: #6f88b6;
+  padding: 16px 14px 150px;
   overflow: auto;
   transition: transform 200ms ease;
   z-index: 1000; /* über der Karte */
@@ -117,7 +117,7 @@ html, body { margin:0; padding:0; height:100%; background: #6f88b6; }
 #placeList {
   margin-top: 16px;
   font: 14px/1.4 system-ui, Arial, sans-serif;
-  background: #6f88b6;
+  background: #486682;
   border: 1px solid #ddd;
 }
 

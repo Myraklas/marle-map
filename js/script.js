@@ -1,6 +1,12 @@
+/**
+ * Hauptskript für die Kartenanwendung: lädt Hintergrundbild,
+ * Nationen und Orte und steuert deren Darstellung.
+ */
 document.addEventListener("DOMContentLoaded", () => {
   const CFG = window.MARLE_CONFIG;
+  // Karte im einfachen CRS-Modus anlegen
   const map = L.map("map", { crs: L.CRS.Simple, zoomSnap: 0.25, wheelPxPerZoomLevel: 120 });
+  // Layer für Marker von Orten vorbereiten
   const placesLayer = L.layerGroup();
 
   const { width: W, height: H, name: IMG } = CFG.image;
@@ -14,11 +20,14 @@ document.addEventListener("DOMContentLoaded", () => {
   map.setMinZoom(fitZoom + (CFG.zoom.minExtra ?? -6));
   map.setMaxZoom(fitZoom + (CFG.zoom.maxExtra ?? +6));
 
+  // Blendet den Orte-Layer je nach Zoomstufe ein oder aus
   function updatePlacesVisibility() {
     const show = map.getZoom() >= placesMinZoom;
     if (show && !map.hasLayer(placesLayer)) {
+      // Layer hinzufügen, wenn Zoom groß genug
       map.addLayer(placesLayer);
     } else if (!show && map.hasLayer(placesLayer)) {
+      // Layer entfernen, wenn Zoom zu klein
       map.removeLayer(placesLayer);
     }
   }
@@ -89,7 +98,7 @@ function openSidebar(props) {
   const places = Array.isArray(props?.places) ? props.places : [];
   const icon = props?.icon ?? '';
   const image = props?.image ?? '';
-
+  // Inhalt zusammenstellen
   sidebarContent.innerHTML = `
     <div class="nation-header">
       <h2>${name}</h2>
@@ -102,6 +111,7 @@ function openSidebar(props) {
   placePopup?.classList.add('hidden');
 
   if (placesSidebar && placeList) {
+    // Orte-Liste aufbauen
     placeList.innerHTML = '';
 
     if (places.length) {
@@ -128,6 +138,7 @@ function openSidebar(props) {
         item.appendChild(descDiv);
       }
 
+      // Events binden
       nameDiv.addEventListener('click', ev => {
         ev.stopPropagation();
         item.classList.toggle('open');
@@ -142,21 +153,25 @@ function openSidebar(props) {
       });
 
       placeList.appendChild(item);
-    });
-  }
+      });
+    }
 
   sidebar.classList.remove('hidden');
   sidebar.classList.add('open');
-}
+  }
 sidebarClose?.addEventListener('click', () => {
+  // rechte Sidebar ausblenden
   sidebar.classList.remove('open');
   sidebar.classList.add('hidden');
+  // linke Sidebar ausblenden
   placesSidebar?.classList.remove('open');
   placesSidebar?.classList.add('hidden');
+  // Popup ausblenden
   placePopup?.classList.add('hidden');
 });
 
 placesClose?.addEventListener('click', () => {
+  // linke Sidebar ausblenden
   placesSidebar?.classList.remove('open');
   placesSidebar?.classList.add('hidden');
 });
