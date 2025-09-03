@@ -98,7 +98,7 @@ function openSidebar(props) {
   const places = Array.isArray(props?.places) ? props.places : [];
   const icon = props?.icon ?? '';
   const image = props?.image ?? '';
-
+  // Inhalt zusammenstellen
   sidebarContent.innerHTML = `
     <div class="nation-header">
       <h2>${name}</h2>
@@ -111,6 +111,7 @@ function openSidebar(props) {
   placePopup?.classList.add('hidden');
 
   if (placesSidebar && placeList) {
+    // Orte-Liste aufbauen
     placeList.innerHTML = '';
 
     if (places.length) {
@@ -137,6 +138,7 @@ function openSidebar(props) {
         item.appendChild(descDiv);
       }
 
+      // Events binden
       nameDiv.addEventListener('click', ev => {
         ev.stopPropagation();
         item.classList.toggle('open');
@@ -151,21 +153,25 @@ function openSidebar(props) {
       });
 
       placeList.appendChild(item);
-    });
-  }
+      });
+    }
 
   sidebar.classList.remove('hidden');
   sidebar.classList.add('open');
-}
+  }
 sidebarClose?.addEventListener('click', () => {
+  // rechte Sidebar ausblenden
   sidebar.classList.remove('open');
   sidebar.classList.add('hidden');
+  // linke Sidebar ausblenden
   placesSidebar?.classList.remove('open');
   placesSidebar?.classList.add('hidden');
+  // Popup ausblenden
   placePopup?.classList.add('hidden');
 });
 
 placesClose?.addEventListener('click', () => {
+  // linke Sidebar ausblenden
   placesSidebar?.classList.remove('open');
   placesSidebar?.classList.add('hidden');
 });
