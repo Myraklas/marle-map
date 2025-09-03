@@ -41,7 +41,7 @@
           openWindows.push(win);
           if (!rootWindow) rootWindow = win;
         }
-      }, 5000);
+      }, 2500);
     });
 
     link.addEventListener('mouseleave', () => {
