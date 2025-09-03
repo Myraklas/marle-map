@@ -4,8 +4,15 @@
 
   function position(win, link) {
     const rect = link.getBoundingClientRect();
-    win.style.left = rect.right + window.scrollX + 8 + 'px';
-    win.style.top = rect.top + window.scrollY + 'px';
+    const width = win.offsetWidth;
+    let left = rect.right + window.scrollX + 8;
+    if (left + width > window.scrollX + window.innerWidth) {
+      left = rect.left + window.scrollX - width - 8;
+    }
+    let top = rect.top + window.scrollY;
+    top = Math.min(top, window.scrollY + window.innerHeight - win.offsetHeight);
+    win.style.left = left + 'px';
+    win.style.top = top + 'px';
   }
 
   function initLink(link) {
