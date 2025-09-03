@@ -108,8 +108,19 @@ function openSidebar(props) {
       ${icon ? `<img class="nation-icon" src="${icon}" alt="Wappen von ${name}">` : ''}
     </div>
     ${image ? `<img class="nation-image" src="${image}" alt="Landschaft von ${name}">` : ''}
-    ${descLong ? `<div class="long">${descLong}</div>` : '<p><i>Keine längere Beschreibung gespeichert.</i></p>'}
   `;
+  if (descLong) {
+    const longDiv = document.createElement('div');
+    longDiv.className = 'long';
+    longDiv.textContent = descLong;
+    sidebarContent.appendChild(longDiv);
+  } else {
+    const p = document.createElement('p');
+    const i = document.createElement('i');
+    i.textContent = 'Keine längere Beschreibung gespeichert.';
+    p.appendChild(i);
+    sidebarContent.appendChild(p);
+  }
 
   placePopup?.classList.add('hidden');
 
@@ -181,7 +192,11 @@ placesClose?.addEventListener('click', () => {
 
 // ===== Abschnitt 4: Daten laden =====
 // Helper: lädt eine Datei (GeoJSON)
-const loadOne = (url) => fetch(url + '?v=' + Date.now()).then(r => r.json());
+const loadOne = (url) => {
+  const u = new URL(url, location.href);
+  u.searchParams.set('v', Date.now());
+  return fetch(u).then(r => r.json());
+};
 
 // Haupt-Ladefunktion: erkennt automatisch, ob index.json (mit "files") oder direktes GeoJSON
 loadOne(CFG.data.nationsUrl)
