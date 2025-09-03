@@ -4,6 +4,7 @@
   const openWindows = [];
   // Merkt sich das erste fixierte Fenster als "Wurzel"
   let rootWindow = null;
+  const LOCK_DELAY = 5000;
 
   /**
    * Positioniert ein Wiki-Fenster neben dem Link, über dem sich der Mauszeiger befindet.
@@ -12,11 +13,15 @@
     const rect = link.getBoundingClientRect();
     const width = win.offsetWidth;
     let left = rect.right + window.scrollX + 8;
+
+
     // Falls rechts nicht genug Platz ist, Fenster links vom Link anzeigen
+
     if (left + width > window.scrollX + window.innerWidth) {
       left = rect.left + window.scrollX - width - 8;
     }
     let top = rect.top + window.scrollY;
+
     // Fensterrand nicht außerhalb des Viewports positionieren
     top = Math.min(top, window.scrollY + window.innerHeight - win.offsetHeight);
     win.style.left = left + 'px';
@@ -30,12 +35,13 @@
   function initLink(link) {
     // Schutz vor doppelter Initialisierung
     if (link.__wikiInit) return;
-    link.__wikiInit = true;
+    link.__wikiInit = true
 
     let timeoutId;     // Timer zum Fixieren des Fensters
     let pinned = false; // Ob das Fenster dauerhaft offen bleibt
     let win = null;     // Referenz auf das aktuell geöffnete Fenster
-
+    let progress = null;
+    
     // Zeiger betritt den Link → Fenster laden und anzeigen
     link.addEventListener('mouseenter', () => {
       const url = link.dataset.wiki;
@@ -45,20 +51,33 @@
         win = document.createElement('div');
         win.className = 'wiki-window';
         win.innerHTML = html;
+        progress = document.createElement('div');
+        progress.className = 'wiki-progress';
+        progress.innerHTML = '<svg viewBox="0 0 32 32"><circle class="bg" cx="16" cy="16" r="14"></circle><circle class="fg" cx="16" cy="16" r="14"></circle></svg>';
+        win.appendChild(progress);
         document.body.appendChild(win);
         position(win, link);
         initLinks(win); // Links innerhalb des Fensters aktivieren
         // Klicks im Fenster nicht als Seitenklick zählen
         win.addEventListener('click', ev => ev.stopPropagation());
+        const fg = progress.querySelector('.fg');
+        fg.style.transition = `stroke-dashoffset ${LOCK_DELAY}ms linear`;
+        requestAnimationFrame(() => {
+          fg.style.strokeDashoffset = '0';
+        });
       });
       // Nach kurzer Zeit Fenster fixieren
       timeoutId = setTimeout(() => {
         pinned = true;
+        if (progress) {
+          progress.remove();
+          progress = null;
+        }
         if (win) {
           openWindows.push(win);
           if (!rootWindow) rootWindow = win;
         }
-      }, 2500);
+      }, LOC
     });
 
     // Zeiger verlässt den Link → Fenster schließen, falls nicht fixiert
@@ -68,6 +87,7 @@
         if (win) {
           win.remove();
           win = null;
+          progress = null;
         }
       }
     });
