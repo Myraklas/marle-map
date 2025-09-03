@@ -77,7 +77,7 @@
           openWindows.push(win);
           if (!rootWindow) rootWindow = win;
         }
-      }, LOC
+      }, LOCK_DELAY);
     });
 
     // Zeiger verlässt den Link → Fenster schließen, falls nicht fixiert
