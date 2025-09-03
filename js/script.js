@@ -14,11 +14,14 @@ document.addEventListener("DOMContentLoaded", () => {
   map.setMinZoom(fitZoom + (CFG.zoom.minExtra ?? -6));
   map.setMaxZoom(fitZoom + (CFG.zoom.maxExtra ?? +6));
 
+  // Blendet den Orte-Layer je nach Zoomstufe ein oder aus
   function updatePlacesVisibility() {
     const show = map.getZoom() >= placesMinZoom;
     if (show && !map.hasLayer(placesLayer)) {
+      // Layer hinzufügen, wenn Zoom groß genug
       map.addLayer(placesLayer);
     } else if (!show && map.hasLayer(placesLayer)) {
+      // Layer entfernen, wenn Zoom zu klein
       map.removeLayer(placesLayer);
     }
   }
