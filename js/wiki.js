@@ -4,7 +4,7 @@
   const openWindows = [];
   // Merkt sich das erste fixierte Fenster als "Wurzel"
   let rootWindow = null;
-  const LOCK_DELAY = 5000;
+  const LOCK_DELAY = 2500;
 
   /**
    * Positioniert ein Wiki-Fenster neben dem Link, über dem sich der Mauszeiger befindet.
