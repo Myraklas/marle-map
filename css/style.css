@@ -37,7 +37,7 @@ html, body { margin:0; padding:0; height:100%; background: #6f88b6; }
 .sidebar {
   position: fixed;
   top: 0;
-  width: 400px;
+  width: 380px;
   max-width: 90vw;
   height: 100vh;
   background: #6f88b6;
