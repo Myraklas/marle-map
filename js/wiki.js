@@ -2,8 +2,6 @@
 (function() {
   // Liste aller dauerhaft geöffneten Wiki-Fenster
   const openWindows = [];
-  // Merkt sich das erste fixierte Fenster als "Wurzel"
-  let rootWindow = null;
   const LOCK_DELAY = 2500;
 
   /**
@@ -75,7 +73,6 @@
         }
         if (win) {
           openWindows.push(win);
-          if (!rootWindow) rootWindow = win;
         }
       }, LOCK_DELAY);
     });
@@ -102,14 +99,7 @@
 
   document.addEventListener('click', (e) => {
     if (e.target.closest('.wiki-window') || e.target.closest('[data-wiki]')) return;
-    openWindows.forEach(w => {
-      if (w !== rootWindow) w.remove();
-    });
-    if (rootWindow) {
-      openWindows.length = 1;
-      openWindows[0] = rootWindow;
-    } else {
-      openWindows.length = 0;
-    }
+    openWindows.forEach(w => w.remove());
+    openWindows.length = 0;
   });
 })();
