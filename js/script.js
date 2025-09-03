@@ -1,6 +1,12 @@
+/**
+ * Hauptskript für die Kartenanwendung: lädt Hintergrundbild,
+ * Nationen und Orte und steuert deren Darstellung.
+ */
 document.addEventListener("DOMContentLoaded", () => {
   const CFG = window.MARLE_CONFIG;
+  // Karte im einfachen CRS-Modus anlegen
   const map = L.map("map", { crs: L.CRS.Simple, zoomSnap: 0.25, wheelPxPerZoomLevel: 120 });
+  // Layer für Marker von Orten vorbereiten
   const placesLayer = L.layerGroup();
 
   const { width: W, height: H, name: IMG } = CFG.image;
