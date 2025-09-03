@@ -19,21 +19,25 @@
       <img id="cityIcon" alt="Stadtwappen" />
       <span class="title-text">Marle – Karte</span>
     </header>
-    <div id="map"></div>
+    <div id="map"></div> <!-- Wird von Leaflet als Kartencontainer genutzt -->
 
     <!-- Seitenleiste für lange Beschreibungen -->
     <div id="sidebar" class="sidebar sidebar-right hidden">
+      <!-- Inhalt per openSidebar() gefüllt -->
       <button id="sidebarClose" aria-label="Schließen">×</button>
       <div id="sidebarContent"></div>
     </div>
 
     <!-- Seitenleiste für wichtige Orte -->
     <div id="placesSidebar" class="sidebar sidebar-left hidden">
+      <!-- Inhalt per openSidebar() gefüllt -->
       <button id="placesClose" aria-label="Schließen">×</button>
       <div id="placeList" class="place-list"></div>
     </div>
 
-  <div id="placePopup" class="place-popup hidden"></div>
+  <div id="placePopup" class="place-popup hidden">
+    <!-- Inhalt per openPlacePopup() gefüllt -->
+  </div>
 
 
   <!-- Leaflet JS -->
