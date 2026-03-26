@@ -10,9 +10,9 @@
         "icon": "https://placehold.co/80x80",
         "image": "https://placehold.co/300x150",
         "places": [
-          { "name": "Hauptstadt", "short": "Zentrum der Nation", "long": "Ausführliche Beschreibung der Hauptstadt.", "coords": [11200, 4800] },
-          { "name": "Nordhafen", "short": "Wichtiger Handelshafen", "long": "Mehr Details zum Nordhafen.", "coords": [11800, 5200] },
-          { "name": "Mystischer Wald", "short": "Gefährliches Gebiet", "long": "Beschreibung des mystischen Waldes.", "coords": [12500, 4500] }
+          { "name": "Branthall", "short": "Zentrum der Nation", "long": "randhall ruht in der südlichen Weite am Rand eines fischreichen Sees mit breiten Schilfgürteln; Koppeln für die Pferdezucht greifen bis an die Stadtränder, und zur Erntezeit ziehen Wagenkolonnen über staubige Feldwege.", "coords": [11200, 4800] },
+          { "name": "Tharoval", "short": "Grenzfestungsstadt im Norden", "long": "Tharoval sitzt kurz unter dem Gebirgssaum auf aufgereihten Hügelrücken zwischen Hopfengärten; morgens hängt Nebel in den Senken, abends riecht es nach warmem Stein und Met. ", "coords": [11800, 5200] },
+          { "name": "Velmara", "short": "Wichtiger Knotenpunkt im Osten", "long": "Velmara liegt am großen Flussbogen der Ostebene, von Kanälen, Speicherhäusern und Gärten umgeben. Aus der Stadt führen schnurgerade Dämme und Alleen in die Felder", "coords": [12500, 4500] }
         ]
       },
       "geometry": {
