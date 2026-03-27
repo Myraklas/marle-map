@@ -8,9 +8,9 @@
         "desc": "Handwerkerstadt geführt von ihren Zünften",
         "long": "Längere Beschreibung (optional, erscheint in der Sidebar).",
         "places": [
-          { "name": "Ceadwynholm", "short": "Handwerkerstadt in der nichts Unmöglich ist", "long": "Ausführliche Beschreibung der Hauptstadt.", "coords": [6000, 1850] },
-          { "name": "Splitterinseln", "short": "Viele kleine Steinformationen besetzt von Karallenriffen wodurch das befahren nicht möglich ist", "coords": [6000, 1000]},
-          { "name": "Goldene Küste", "short": "Ein schmaler Landstreifen zwischen Ceadwyn und Naskar an dem nur die Goldfadenstraße entlangläuft", "coords": [6000, 2000] }
+          { "name": "Ceadwynholm", "short": "Handwerkerstadt in der nichts Unmöglich ist", "long": "Ausführliche Beschreibung der Hauptstadt.", "coords": [6200, 1850] },
+          { "name": "Splitterinseln", "short": "Viele kleine Steinformationen besetzt von Karallenriffen wodurch das befahren nicht möglich ist", "coords": [5800, 1200]},
+          { "name": "Goldene Küste", "short": "Ein schmaler Landstreifen zwischen Ceadwyn und Naskar an dem nur die Goldfadenstraße entlangläuft", "coords": [7000, 3000] }
         ]
       },
       "geometry": {
