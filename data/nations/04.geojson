@@ -8,9 +8,9 @@
         "desc": "Kurzbeschreibung …",
         "long": "Längere Beschreibung (optional, erscheint in der Sidebar).",
         "places": [
-          { "name": "Hauptstadt", "short": "Zentrum der Nation", "long": "Ausführliche Beschreibung der Hauptstadt." },
-          { "name": "Nordhafen", "short": "Wichtiger Handelshafen", "long": "Mehr Details zum Nordhafen." },
-          { "name": "Mystischer Wald", "short": "Gefährliches Gebiet", "long": "Beschreibung des mystischen Waldes." }
+          { "name": "Ceadwynholm", "short": "Handwerkerstadt in der nichts Unmöglich ist", "long": "Ausführliche Beschreibung der Hauptstadt.", "coords": [6000, 1850] },
+          { "name": "Splitterinseln", "short": "Viele kleine Steinformationen besetzt von Karallenriffen wodurch das befahren nicht möglich ist", "coords": [6000, 1000]},
+          { "name": "Goldene Küste", "short": "Ein schmaler Landstreifen zwischen Ceadwyn und Naskar an dem nur die Goldfadenstraße entlangläuft", "coords": [6000, 2000] }
         ]
       },
       "geometry": {
