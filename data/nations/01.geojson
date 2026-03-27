@@ -11,7 +11,7 @@
         "icon": "https://placehold.co/80x80",
         "image": "https://placehold.co/300x150",
         "places": [
-          { "name": "Branthall", "short": "Brandhall, das Zentrum der Nation, ruht in der südlichen Weite am Rand eines fischreichen Sees mit breiten Schilfgürteln; Koppeln für die Pferdezucht greifen bis an die Stadtränder, und zur Erntezeit ziehen Wagenkolonnen über staubige Feldwege.", "coords": [11280, 2700] },
+          { "name": "Branthall", "short": "Brandhall, das Zentrum der Nation, ruht in der südlichen Weite am Rand eines fischreichen Sees mit breiten Schilfgürteln; Koppeln für die Pferdezucht greifen bis an die Stadtränder, und zur Erntezeit ziehen Wagenkolonnen über staubige Feldwege.", "coords": [11280, 2600] },
           { "name": "Tharoval", "short": "Grenzfestungsstadt im Norden namens Tharoval sitzt kurz unter dem Gebirgssaum auf aufgereihten Hügelrücken zwischen Hopfengärten; morgens hängt Nebel in den Senken, abends riecht es nach warmem Stein und Met. ", "coords": [10600, 4800] },
           { "name": "Velmara", "short": "Velmara liegt am großen Flussbogen der Ostebene und bildet durch seine Kanäle, Speicherhäuser und Gärten einen wichtigen Knotenpunkt. Aus der Stadt führen schnurgerade Dämme und Alleen in die Felder", "coords": [12900, 4000] }
         ]
