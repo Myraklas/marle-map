@@ -5,7 +5,7 @@
       "type": "Feature",
       "properties": {
         "name": "Ceadwyn",
-        "desc": "Kurzbeschreibung …",
+        "desc": "Handwerkerstadt geführt von ihren Zünften",
         "long": "Längere Beschreibung (optional, erscheint in der Sidebar).",
         "places": [
           { "name": "Ceadwynholm", "short": "Handwerkerstadt in der nichts Unmöglich ist", "long": "Ausführliche Beschreibung der Hauptstadt.", "coords": [6000, 1850] },
