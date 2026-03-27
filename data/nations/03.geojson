@@ -9,7 +9,7 @@
         "long": "Längere Beschreibung (optional, erscheint in der Sidebar).",
 
         "places": [
-          { "name": "Naskar", "short": "Eine chaotische und enge Stadt in der es möglich ist Brot, Tiere und Mondblut am selben Ort zu kaufen", "long": "Ausführliche Beschreibung der Hauptstadt.", "coords": [7500, 2120] },
+          { "name": "Naskar", "short": "Eine chaotische und enge Stadt in der es möglich ist Brot, Tiere und Mondblut am selben Ort zu kaufen", "long": "Ausführliche Beschreibung der Hauptstadt.", "coords": [7500, 2170] },
           { "name": "Mondsteinminen", "short": "Größte Mine des Landes, selten födert sie einen Mondkristall zu Tage ", "long": "Mehr Details zum Nordhafen.", "coords": [7920, 3250] },
           { "name": "Trockenstaubinsel", "short": "Gefährliche Wüsteninsel, Unbewohnt, Heimat von Lindwürmern", "long": "Beschreibung des mystischen Waldes.", "coords": [8100, 1800] }
         ]
